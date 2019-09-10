@@ -3,15 +3,15 @@ import org.junit.Test;
 
 
 public class APITest {
-    private void apiRequest(int someStatus){
+    private void apiRequest(int someStatusCode){
         String baseURI = "https://httpbin.org/";
         RestAssured.given()
                 .baseUri(baseURI) //путь к домену
-                .basePath("status/" + someStatus) //Вывести статус в ответе
+                .basePath("status/" + someStatusCode) //Вывести статус в ответе
 
                 .when().delete()// какой метод я для этого использую
                 .then()
-                .statusCode(someStatus);//проверяю статус ответа
+                .statusCode(someStatusCode);//проверяю статус ответа
 
     }
     @Test
