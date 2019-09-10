@@ -16,7 +16,7 @@ public class APITest {
     }
     @Test
     public void apiTest(){
-        int[] statusMassive = {200, 300, 404, 500};
+        int[] statusMassive = {200, 300, 404, 500}; //статус 100 не хочет отвечать. TODO - выяснить, почему!
         for (int i : statusMassive) {
             try {
                 apiRequest(i);
