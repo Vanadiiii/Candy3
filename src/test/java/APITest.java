@@ -1,6 +1,7 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -9,12 +10,13 @@ import org.junit.Test;
 public class APITest {
     private static String baseURI = "https://httpbin.org/";
     private int[] statusMassive = {200, 300, 400, 500};
+    private int statusNull;
     @Test
     public void apiTest1(){
-
-        RestAssured.given()
+        ValidatableResponse request; //задаю переменной ответ от сервера
+        request = RestAssured.given()
                 .baseUri(baseURI) //путь к домену
-                .basePath("status/" + statusMassive[3]) //Вывести статус 100 в ответе
+                .basePath("status/" + statusMassive[3]) //Вывести статус в ответе
                 /** Следующие выражения я не использую, т.к. десериализировать JSON into POJO мне здесь не нужно*/
 //                .contentType(ContentType.JSON) //какой тип контента я использую для этого
 //                .header("", "") //TODO узнать, что это такое??
@@ -29,9 +31,14 @@ public class APITest {
 //                        " x-content-type-options: nosniff \n" +
 //                        " x-frame-options: DENY \n" +
 //                        " x-xss-protection: 1; mode=block ")
-                /** Конец ненужных (пока) 911-765 выражений*/
+                /** Конец ненужных (пока) выражений*/
                 .when().post()// какой метод я для этого использую
                 .then()
                 .statusCode(statusMassive[3]);
+
+//        for (int statusNumber:statusMassive) {
+//            statusNull = statusMassive[statusNumber];
+//            myMethod.statusCode(statusMassive[statusNumber]);
+//        }
     }
 }
