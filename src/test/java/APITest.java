@@ -10,13 +10,12 @@ import org.junit.Test;
 public class APITest {
     private static String baseURI = "https://httpbin.org/";
     private int[] statusMassive = {200, 300, 400, 500};
-    private int statusNull;
-    @Test
-    public void apiTest1(){
+
+    public void apiRequest(int someStatus){
         ValidatableResponse request; //задаю переменной ответ от сервера
         request = RestAssured.given()
                 .baseUri(baseURI) //путь к домену
-                .basePath("status/" + statusMassive[3]) //Вывести статус в ответе
+                .basePath("status/" + someStatus) //Вывести статус в ответе
                 /** Следующие выражения я не использую, т.к. десериализировать JSON into POJO мне здесь не нужно*/
 //                .contentType(ContentType.JSON) //какой тип контента я использую для этого
 //                .header("", "") //TODO узнать, что это такое??
@@ -34,11 +33,13 @@ public class APITest {
                 /** Конец ненужных (пока) выражений*/
                 .when().post()// какой метод я для этого использую
                 .then()
-                .statusCode(statusMassive[3]);
-
-//        for (int statusNumber:statusMassive) {
-//            statusNull = statusMassive[statusNumber];
-//            myMethod.statusCode(statusMassive[statusNumber]);
-//        }
+                .statusCode(someStatus);
+    }
+    @Test
+    public void apiTest(){
+        for (int statusNumber = 0; statusNumber<statusMassive.length; statusNumber++) {
+            System.out.println(statusMassive[statusNumber] + ": statusCode is OK!");
+            apiRequest(statusMassive[statusNumber]);
+        }
     }
 }
