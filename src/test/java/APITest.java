@@ -13,6 +13,8 @@ public class APITest {
                 .then()
                 .statusCode(someStatusCode);//проверяю статус ответа
 
+
+
     }
     @Test
     public void apiTest(){
