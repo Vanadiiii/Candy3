@@ -11,3 +11,7 @@
 //                        " x-content-type-options: nosniff \n" +
 //                        " x-frame-options: DENY \n" +
 //                        " x-xss-protection: 1; mode=block ")
+
+
+//                .and().extract().response()
+//                .prettyPrint(); //милый принт)) Но ему нечего выводить))
