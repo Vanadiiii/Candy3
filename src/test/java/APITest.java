@@ -1,10 +1,5 @@
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class APITest {
@@ -12,8 +7,7 @@ public class APITest {
     private int[] statusMassive = {200, 300, 400, 500};
 
     public void apiRequest(int someStatus){
-        ValidatableResponse request; //задаю переменной ответ от сервера
-        request = RestAssured.given()
+        RestAssured.given()
                 .baseUri(baseURI) //путь к домену
                 .basePath("status/" + someStatus) //Вывести статус в ответе
                 /** Следующие выражения я не использую, т.к. десериализировать JSON into POJO мне здесь не нужно*/
