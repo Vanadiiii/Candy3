@@ -1,6 +1,5 @@
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
-import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -8,8 +7,7 @@ public class APITest {
     private int someStatuse;
     private void apiRequest(int someStatusCode){
         String baseURI = "https://httpbin.org/";
-        ValidatableResponse requestFromThisURI;
-        requestFromThisURI = RestAssured.given()
+            RestAssured.given()
                 .baseUri(baseURI) //путь к домену
                 .basePath("status/" + someStatusCode) //Вывести статус в ответе
 
