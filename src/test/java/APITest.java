@@ -1,11 +1,13 @@
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
+import org.junit.runners.model.TestTimedOutException;
 
 
 public class APITest {
     private int someStatuse;
     private void apiRequest(int someStatusCode){
+        System.out.println("Check out status code " + someStatusCode);
         String baseURI = "https://httpbin.org/";
             RestAssured.given()
                 .baseUri(baseURI) //путь к домену
@@ -14,41 +16,36 @@ public class APITest {
                 .when().delete()// какой метод я для этого использую
                 .then()
                 .statusCode(someStatusCode).log().status();
+        System.out.println("Status code " + someStatusCode + " is OK");
     }
+
 //    @Test
-//    public void apiTest(){
-//        int[] statusMassive = {200, 300, 404, 500}; //статус 100 не хочет отвечать на сайте
-//        for (int i : statusMassive) {
-//            try {
-//                apiRequest(i);
-//                System.out.println("StatusCode " + i + " is responded");
-//            } catch (AssertionError e) {
-//                System.out.println("StatusCode " + i + " is NOT responded");
-//            }
-//        }
+//    public void apiTest1(){ //TODO узнать, как завершить действие, после ожидания определённого количества секунд
+//        someStatuse = 100;
+//        apiRequest(someStatuse);
 //    }
 
     @Test
-    public void apiTest1(){
+    public void apiTest2(){
         someStatuse = 200;
         apiRequest(someStatuse);
     }
 
     @Test
-    public void apiTest2(){
+    public void apiTest3(){
         someStatuse = 300;
         apiRequest(someStatuse);
     }
 
     @Test
-    public void apiTest3(){
+    public void apiTest4(){
         someStatuse = 400;
         apiRequest(someStatuse);
     }
 
     @Test
-    public void apiTest4(){
-        someStatuse = 55500;
+    public void apiTest5(){
+        someStatuse = 500;
         apiRequest(someStatuse);
 
     }
